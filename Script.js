@@ -16,9 +16,9 @@ function tampilkanMenu(topik) {
             idPrefix = "gempa";
             videoSrc = "gempa-bumi.mp4";
             break;
-        case 'bullying':
-            judul = "Bullying";
-            idPrefix = "bullying";
+        case 'Perundungan':
+            judul = "Perundungan";
+            idPrefix = "perundungan";
             videoSrc = "bullying.mp4";
             break;
     }
@@ -100,11 +100,28 @@ function koreksiTeks(prefix) {
     let feedback = "";
     let adaKesalahan = false; // Tambahkan flag untuk memeriksa kesalahan
 
-    const kataKunciTopik = {
-        "gunung meletus": ["magma", "letusan", "lava", "abu", "vulkanik", "gunung api"],
-        "gempa": ["lempeng", "seismik", "tektonik", "getaran", "retakan", "episentrum"],
-        "bullying": ["kekerasan", "pelecehan", "korban", "pelaku", "verbal", "fisik", "intimidasi"]
-    };
+   const kataKunciTopik = {
+    "gunung meletus": [
+        "magma", "lava", "letusan", "abu", "abu vulkanik", "gunung api", "kawah", "erupsi",
+        "awan panas", "aliran piroklastik", "gemuruh", "getaran", "kerucut", "bencana",
+        "korban", "evakuasi", "larva", "panas bumi", "guguran", "kubah lava", "material",
+        "aliran lahar", "hujan abu", "debu", "gas beracun", "sulfur", "meletus", "isi perut bumi",
+        "gunung berapi", "gundukan", "gejala alam"
+    ],
+    "gempa": [
+        "gempa bumi", "getaran", "patahan", "retakan", "lempeng", "pergeseran lempeng",
+        "tektonik", "seismik", "episentrum", "hiposentrum", "seismograf", "kerusakan",
+        "rumah roboh", "bangunan runtuh", "tanah longsor", "tsunami", "gelombang",
+        "korban", "evakuasi", "bencana alam", "alam", "pergerakan tanah"
+    ],
+    "bullying": [
+        "bullying", "perundungan", "kekerasan", "pelecehan", "verbal", "fisik", "intimidasi",
+        "mengejek", "memukul", "menendang", "mengucilkan", "menghina", "mengejek nama",
+        "cyberbullying", "teman", "sekolah", "guru", "korban", "pelaku", "melapor",
+        "melindungi", "pertemanan", "perilaku buruk", "mengancam"
+    ]
+};
+
 
     const kataKunci = kataKunciTopik[prefix];
     
@@ -142,7 +159,7 @@ function koreksiTeks(prefix) {
             poin++;
         } else {
             feedback += `⚠️ <strong>Pernyataan Umum</strong> belum menunjukkan topik <em>${prefix}</em> dengan jelas.<br>`;
-            feedback += `💡 Sertakan kata seperti <em>${kataKunci.slice(0, 4).join("</em>, <em>")}...</em><br>`;
+            feedback += `💡 Sertakan kata seperti <em>${kataKunci.join("</em>, <em>")}</em><br>`;
             adaKesalahan = true;
         }
 
@@ -175,7 +192,7 @@ function koreksiTeks(prefix) {
             poin++;
         } else {
             feedback += `⚠️ <strong>Deretan Penjelas</strong> belum menunjukkan topik <em>${prefix}</em> secara relevan.<br>`;
-            feedback += `💡 Sertakan kata kunci seperti <em>${kataKunci.slice(0, 4).join("</em>, <em>")}...</em><br>`;
+            feedback += `💡 Sertakan kata seperti <em>${kataKunci.join("</em>, <em>")}</em><br>`;
             adaKesalahan = true;
         }
 
@@ -229,3 +246,4 @@ function tampilkanNotifikasi(pesan, sukses = false) {
         notifikasi.style.display = "none";
     }, 3000);
 }
+
