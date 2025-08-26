@@ -23,7 +23,7 @@ function tampilkanMenu(topik) {
             break;
     }
 
-    konten.innerHTML = 
+    konten.innerHTML = `
         <h2>${judul}</h2>
         <video width="100%" height="auto" controls>
             <source src="${videoSrc}" type="video/mp4">
@@ -50,21 +50,21 @@ function tampilkanMenu(topik) {
 
         <div id="hasil_${idPrefix}" style="margin-top: 20px;"></div>
         <div id="feedback_${idPrefix}" style="margin-top: 10px;"></div>
-    ;
+    `;
 }
 
 function simpanLatihan(prefix) {
-    const judul = document.getElementById(${prefix}_judul).value.trim();
-    const pernyataan = document.getElementById(${prefix}_pernyataan).value.trim();
-    const penjelas = document.getElementById(${prefix}_penjelas).value.trim();
-    const kesimpulan = document.getElementById(${prefix}_kesimpulan).value.trim();
+    const judul = document.getElementById(`${prefix}_judul`).value.trim();
+    const pernyataan = document.getElementById(`${prefix}_pernyataan`).value.trim();
+    const penjelas = document.getElementById(`${prefix}_penjelas`).value.trim();
+    const kesimpulan = document.getElementById(`${prefix}_kesimpulan`).value.trim();
 
     if (!judul || !pernyataan || !penjelas || !kesimpulan) {
         alert("Silakan lengkapi semua bagian sebelum menyimpan dokumen.");
         return;
     }
 
-    const isiDoc = 
+    const isiDoc = `
         <html xmlns:o='urn:schemas-microsoft-com:office:office' 
               xmlns:w='urn:schemas-microsoft-com:office:word' 
               xmlns='http://www.w3.org/TR/REC-html40'>
@@ -76,13 +76,13 @@ function simpanLatihan(prefix) {
             <p><strong>Interpretasi / Kesimpulan:</strong><br>${kesimpulan}</p>
         </body>
         </html>
-    ;
+    `;
 
     const blob = new Blob(['\ufeff', isiDoc], {
         type: 'application/msword'
     });
 
-    const namaFile = ${prefix}_latihan.doc;
+    const namaFile = `${prefix}_latihan.doc`;
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = namaFile;
@@ -92,10 +92,10 @@ function simpanLatihan(prefix) {
     document.body.removeChild(link);
 }
 function koreksiTeks(prefix) {
-    const judul = document.getElementById(${prefix}_judul).value.trim();
-    const pernyataan = document.getElementById(${prefix}_pernyataan).value.trim();
-    const penjelas = document.getElementById(${prefix}_penjelas).value.trim();
-    const kesimpulan = document.getElementById(${prefix}_kesimpulan).value.trim();
+    const judul = document.getElementById(`${prefix}_judul`).value.trim();
+    const pernyataan = document.getElementById(`${prefix}_pernyataan`).value.trim();
+    const penjelas = document.getElementById(`${prefix}_penjelas`).value.trim();
+    const kesimpulan = document.getElementById(`${prefix}_kesimpulan`).value.trim();
 
     let feedback = "";
     let adaKesalahan = false; // Tambahkan flag untuk memeriksa kesalahan
@@ -113,7 +113,7 @@ function koreksiTeks(prefix) {
         feedback += "❌ <strong>Judul</strong> belum diisi.<br>";
         adaKesalahan = true;
     } else if (!judul.toLowerCase().includes(prefix)) {
-        feedback += ⚠️ <strong>Judul</strong> belum menyebutkan topik dengan jelas. Pastikan judul mengandung kata "<em>${prefix}</em>".<br>;
+        feedback += `⚠️ <strong>Judul</strong> belum menyebutkan topik dengan jelas. Pastikan judul mengandung kata "<em>${prefix}</em>".<br>`;
         adaKesalahan = true;
     } else {
         feedback += "✅ <strong>Judul</strong> sudah sesuai dengan topik.<br>";
@@ -131,7 +131,7 @@ function koreksiTeks(prefix) {
             feedback += "✅ <strong>Pernyataan Umum</strong> sudah memuat definisi.<br>";
             poin++;
         } else {
-            feedback += ⚠️ <strong>Pernyataan Umum</strong> sebaiknya mengandung kata seperti <em>adalah</em>, <em>merupakan</em>, <em>ialah<em>, <em>yakni<em>.<br>;
+            feedback += `⚠️ <strong>Pernyataan Umum</strong> sebaiknya mengandung kata seperti <em>adalah</em>, <em>merupakan</em>, <em>ialah<em>, <em>yakni<em>.<br>`;
             adaKesalahan = true;
         }
 
@@ -141,8 +141,8 @@ function koreksiTeks(prefix) {
             feedback += "✅ <strong>Pernyataan Umum</strong> sesuai dengan topik.<br>";
             poin++;
         } else {
-            feedback += ⚠️ <strong>Pernyataan Umum</strong> belum menunjukkan topik <em>${prefix}</em> dengan jelas.<br>;
-            feedback += 💡 Sertakan kata seperti <em>${kataKunci.slice(0, 4).join("</em>, <em>")}...</em><br>;
+            feedback += `⚠️ <strong>Pernyataan Umum</strong> belum menunjukkan topik <em>${prefix}</em> dengan jelas.<br>`;
+            feedback += `💡 Sertakan kata seperti <em>${kataKunci.slice(0, 4).join("</em>, <em>")}...</em><br>`;
             adaKesalahan = true;
         }
 
@@ -163,8 +163,8 @@ function koreksiTeks(prefix) {
             feedback += "✅ <strong>Deretan Penjelas</strong> sudah menjelaskan proses secara logis.<br>";
             poin++;
         } else {
-            feedback += ⚠️ <strong>Deretan Penjelas</strong> belum menjelaskan proses atau sebab-akibat dengan jelas.<br>;
-            feedback += 💡 Gunakan kata seperti <em>karena</em>, <em>sehingga</em>, <em>akibatnya<em>, <em>pertama<em>, <em>selanjutnya<em>, <em>kemudian<em>, <em>lalu<em>, <em>akhirnya<em>, <em>selain itu<em>.<br>;
+            feedback += `⚠️ <strong>Deretan Penjelas</strong> belum menjelaskan proses atau sebab-akibat dengan jelas.<br>`;
+            feedback += `💡 Gunakan kata seperti <em>karena</em>, <em>sehingga</em>, <em>akibatnya<em>, <em>pertama<em>, <em>selanjutnya<em>, <em>kemudian<em>, <em>lalu<em>, <em>akhirnya<em>, <em>selain itu<em>.<br>`;
             adaKesalahan = true;
         }
 
@@ -174,8 +174,8 @@ function koreksiTeks(prefix) {
             feedback += "✅ <strong>Deretan Penjelas</strong> sesuai dengan topik.<br>";
             poin++;
         } else {
-            feedback += ⚠️ <strong>Deretan Penjelas</strong> belum menunjukkan topik <em>${prefix}</em> secara relevan.<br>;
-            feedback += 💡 Sertakan kata kunci seperti <em>${kataKunci.slice(0, 4).join("</em>, <em>")}...</em><br>;
+            feedback += `⚠️ <strong>Deretan Penjelas</strong> belum menunjukkan topik <em>${prefix}</em> secara relevan.<br>`;
+            feedback += `💡 Sertakan kata kunci seperti <em>${kataKunci.slice(0, 4).join("</em>, <em>")}...</em><br>`;
             adaKesalahan = true;
         }
 
@@ -196,7 +196,7 @@ function koreksiTeks(prefix) {
             feedback += "✅ <strong>Interpretasi</strong> sudah menyimpulkan dengan baik.<br>";
             poin++;
         } else {
-            feedback += ⚠️ <strong>Interpretasi</strong> sebaiknya memuat kata simpulan seperti <em>dengan demikian</em>, <em>kesimpulannya</em>, <em>oleh karena itu</em>, <em>dapat disimpulkan</em>, <em>hal ini menunjukkan</em>, <em>penting bagi kita</em>.<br>;
+            feedback += `⚠️ <strong>Interpretasi</strong> sebaiknya memuat kata simpulan seperti <em>dengan demikian</em>, <em>kesimpulannya</em>, <em>oleh karena itu</em>, <em>dapat disimpulkan</em>, <em>hal ini menunjukkan</em>, <em>penting bagi kita</em>.<br>`;
             adaKesalahan = true;
         }
         if (poin === 2) {
@@ -205,7 +205,7 @@ function koreksiTeks(prefix) {
     }
 
     // Tampilkan hasil feedback
-    document.getElementById(feedback_${prefix}).innerHTML = <div class="feedback-box">${feedback}</div>;
+    document.getElementById(`feedback_${prefix}`).innerHTML = `<div class="feedback-box">${feedback}</div>`;
 
     // Tampilkan notifikasi berdasarkan kesalahan
     if (adaKesalahan) {
